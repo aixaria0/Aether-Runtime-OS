@@ -50,8 +50,8 @@ fn main() -> Result<()> {
             Ok(())
         }
         Some("demo") | None => demo(),
-        Some(other) => bail!(
-            "unknown command: {other}. Use `demo`, `audit`, `receipt`, or `worker`."
-        ),
+        Some(other) => {
+            bail!("unknown command: {other}. Use `demo`, `audit`, `receipt`, or `worker`.")
+        }
     }
 }

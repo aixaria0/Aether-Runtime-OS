@@ -131,10 +131,24 @@ mod tests {
         let id = "exec-receipt";
         let hash = sha256_hex(b"result");
         journal.create(id, "secret-payload").unwrap();
-        journal.transition(id, "Created", "Scheduled", Some("worker-1"), None).unwrap();
-        journal.transition(id, "Scheduled", "Running", Some("worker-1"), None).unwrap();
-        journal.transition(id, "Running", "Verifying", Some("worker-1"), Some(&hash)).unwrap();
-        journal.transition(id, "Verifying", "Completed", Some("worker-1"), Some(&hash)).unwrap();
+        journal
+            .transition(id, "Created", "Scheduled", Some("worker-1"), None)
+            .unwrap();
+        journal
+            .transition(id, "Scheduled", "Running", Some("worker-1"), None)
+            .unwrap();
+        journal
+            .transition(id, "Running", "Verifying", Some("worker-1"), Some(&hash))
+            .unwrap();
+        journal
+            .transition(
+                id,
+                "Verifying",
+                "Completed",
+                Some("worker-1"),
+                Some(&hash),
+            )
+            .unwrap();
 
         let receipt = export_receipt(&journal, id).expect("export receipt");
         assert_eq!(receipt.schema, RECEIPT_SCHEMA);
