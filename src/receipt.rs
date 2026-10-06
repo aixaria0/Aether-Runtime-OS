@@ -141,13 +141,7 @@ mod tests {
             .transition(id, "Running", "Verifying", Some("worker-1"), Some(&hash))
             .unwrap();
         journal
-            .transition(
-                id,
-                "Verifying",
-                "Completed",
-                Some("worker-1"),
-                Some(&hash),
-            )
+            .transition(id, "Verifying", "Completed", Some("worker-1"), Some(&hash))
             .unwrap();
 
         let receipt = export_receipt(&journal, id).expect("export receipt");
