@@ -1,6 +1,6 @@
 [package]
 name = "aether-runtime-os"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 description = "Fault-tolerant, evidence-carrying runtime for autonomous and distributed AI execution"
 repository = "https://github.com/aixaria0/Aether-Runtime-OS"

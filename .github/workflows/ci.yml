@@ -18,5 +18,7 @@ jobs:
         run: cargo clippy --all-targets --all-features -- -D warnings
       - name: Tests
         run: cargo test --all
-      - name: End-to-end recovery + evidence demo
-        run: cargo run -- demo
+      - name: End-to-end recovery + evidence + replay demo
+        run: AETHER_ROOT=.aether-ci cargo run -- demo
+      - name: Replay audit persisted journal
+        run: cargo run -- audit --db .aether-ci/runtime.db
