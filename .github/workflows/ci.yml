@@ -22,3 +22,10 @@ jobs:
         run: AETHER_ROOT=.aether-ci cargo run -- demo
       - name: Replay audit persisted journal
         run: cargo run -- audit --db .aether-ci/runtime.db
+      - name: Export deterministic execution receipt
+        run: cargo run -- receipt latest --db .aether-ci/runtime.db --out .aether-ci/receipt.json
+      - name: Validate receipt contract marker
+        run: |
+          grep -F '"schema": "aether-execution-receipt/v1"' .aether-ci/receipt.json
+          grep -F '"scope": "LOCAL_PERSISTED_EXECUTION_JOURNAL_ONLY"' .aether-ci/receipt.json
+          grep -F '"terminal_state": "Completed"' .aether-ci/receipt.json
